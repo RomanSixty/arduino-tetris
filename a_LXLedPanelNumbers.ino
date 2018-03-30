@@ -1,149 +1,128 @@
 /**
  * functions to draw numbers for scores etc.
  */
-class LXLedPanelNumbers {
-  public:
-    static void write ( unsigned long number = 0, int where = SCORE_POINTS, uint16_t color = YELLOW ) {
-      int digit_1 = number % 10;
-      int digit_2 = (int) floor(number / 10) % 10;
-      int digit_3 = (int) floor(number / 100) % 10;
-      int digit_4 = (int) floor(number / 1000) % 10;
-      int digit_5 = (int) floor(number / 10000) % 10;
-      int digit_6 = (int) floor(number / 100000) % 10;
+ 
+void LXLedPanelNumbers_clear ( byte offset_x = 0, byte offset_y = 0 ) {
+  matrix.fillRect(offset_x + 0, offset_y + 0, 3, 5, BLACK);
+}
 
-      switch (where) {
-        case SCORE_LEVELS:
-          LXLedPanelNumbers::draw_number(digit_3, 20, 11, color);
-          LXLedPanelNumbers::draw_number(digit_2, 24, 11, color);
-          LXLedPanelNumbers::draw_number(digit_1, 28, 11, color);
-          break;
+void LXLedPanelNumbers_0 ( byte offset_x = 0, byte offset_y = 0, uint16_t color = YELLOW ) {
+  matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 0, offset_y + 4, color);
+  matrix.drawPixel(offset_x + 1, offset_y + 0, color);
+  matrix.drawLine(offset_x + 2, offset_y + 0, offset_x + 2, offset_y + 4, color);
+  matrix.drawPixel(offset_x + 1, offset_y + 4, color);
+}
 
-        case SCORE_LINES:
-          LXLedPanelNumbers::draw_number(digit_3, 20, 18, color);
-          LXLedPanelNumbers::draw_number(digit_2, 24, 18, color);
-          LXLedPanelNumbers::draw_number(digit_1, 28, 18, color);
-          break;
+void LXLedPanelNumbers_1 ( byte offset_x = 0, byte offset_y = 0, uint16_t color = YELLOW ) {
+  matrix.drawPixel(offset_x + 0, offset_y + 0, color);
+  matrix.drawLine(offset_x + 1, offset_y + 0, offset_x + 1, offset_y + 3, color);
+  matrix.drawLine(offset_x + 0, offset_y + 4, offset_x + 2, offset_y + 4, color);
+}
 
-        case SCORE_POINTS:
-          LXLedPanelNumbers::draw_number(digit_6,  8, 25, color);
-          LXLedPanelNumbers::draw_number(digit_5, 12, 25, color);
-          LXLedPanelNumbers::draw_number(digit_4, 16, 25, color);
-          LXLedPanelNumbers::draw_number(digit_3, 20, 25, color);
-          LXLedPanelNumbers::draw_number(digit_2, 24, 25, color);
-          LXLedPanelNumbers::draw_number(digit_1, 28, 25, color);
-          break;
-      }
-    }
+void LXLedPanelNumbers_2 ( byte offset_x = 0, byte offset_y = 0, uint16_t color = YELLOW ) {
+  matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 2, offset_y + 0, color);
+  matrix.drawPixel(offset_x + 2, offset_y + 1, color);
+  matrix.drawLine(offset_x + 0, offset_y + 2, offset_x + 2, offset_y + 2, color);
+  matrix.drawPixel(offset_x + 0, offset_y + 3, color);
+  matrix.drawLine(offset_x + 0, offset_y + 4, offset_x + 2, offset_y + 4, color);
+}
 
-  private:
-    static void draw_number ( int number = 0, int offset_x = 0, int offset_y = 0, uint16_t color = YELLOW ) {
-      switch ( number ) {
-        case 0: draw_0(offset_x, offset_y, color); break;
-        case 1: draw_1(offset_x, offset_y, color); break;
-        case 2: draw_2(offset_x, offset_y, color); break;
-        case 3: draw_3(offset_x, offset_y, color); break;
-        case 4: draw_4(offset_x, offset_y, color); break;
-        case 5: draw_5(offset_x, offset_y, color); break;
-        case 6: draw_6(offset_x, offset_y, color); break;
-        case 7: draw_7(offset_x, offset_y, color); break;
-        case 8: draw_8(offset_x, offset_y, color); break;
-        case 9: draw_9(offset_x, offset_y, color); break;
-      }
-    }
-  
-    static void clear_number ( int offset_x = 0, int offset_y = 0 ) {
-      matrix.fillRect(offset_x + 0, offset_y + 0, 3, 5, BLACK);
-    }
+void LXLedPanelNumbers_3 ( byte offset_x = 0, byte offset_y = 0, uint16_t color = YELLOW ) {
+  matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 2, offset_y + 0, color);
+  matrix.drawPixel(offset_x + 2, offset_y + 1, color);
+  matrix.drawLine(offset_x + 0, offset_y + 2, offset_x + 2, offset_y + 2, color);
+  matrix.drawPixel(offset_x + 2, offset_y + 3, color);
+  matrix.drawLine(offset_x + 0, offset_y + 4, offset_x + 2, offset_y + 4, color);
+}
 
-    static void draw_0 ( int offset_x = 0, int offset_y = 0, uint16_t color = YELLOW ) {
-      clear_number(offset_x, offset_y);
-    
-      matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 0, offset_y + 4, color);
-      matrix.drawPixel(offset_x + 1, offset_y + 0, color);
-      matrix.drawLine(offset_x + 2, offset_y + 0, offset_x + 2, offset_y + 4, color);
-      matrix.drawPixel(offset_x + 1, offset_y + 4, color);
-    }
+void LXLedPanelNumbers_4 ( byte offset_x = 0, byte offset_y = 0, uint16_t color = YELLOW ) {
+  matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 0, offset_y + 2, color);
+  matrix.drawPixel(offset_x + 1, offset_y + 2, color);
+  matrix.drawLine(offset_x + 2, offset_y + 0, offset_x + 2, offset_y + 4, color);
+}
 
-    static void draw_1 ( int offset_x = 0, int offset_y = 0, uint16_t color = YELLOW ) {
-      clear_number(offset_x, offset_y);
-    
-      matrix.drawPixel(offset_x + 0, offset_y + 0, color);
-      matrix.drawLine(offset_x + 1, offset_y + 0, offset_x + 1, offset_y + 3, color);
-      matrix.drawLine(offset_x + 0, offset_y + 4, offset_x + 2, offset_y + 4, color);
-    }
+void LXLedPanelNumbers_5 ( byte offset_x = 0, byte offset_y = 0, uint16_t color = YELLOW ) {
+  matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 2, offset_y + 0, color);
+  matrix.drawPixel(offset_x + 0, offset_y + 1, color);
+  matrix.drawLine(offset_x + 0, offset_y + 2, offset_x + 2, offset_y + 2, color);
+  matrix.drawPixel(offset_x + 2, offset_y + 3, color);
+  matrix.drawLine(offset_x + 0, offset_y + 4, offset_x + 2, offset_y + 4, color);
+}
 
-    static void draw_2 ( int offset_x = 0, int offset_y = 0, uint16_t color = YELLOW ) {
-      clear_number(offset_x, offset_y);
-    
-      matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 2, offset_y + 0, color);
-      matrix.drawPixel(offset_x + 2, offset_y + 1, color);
-      matrix.drawLine(offset_x + 0, offset_y + 2, offset_x + 2, offset_y + 2, color);
-      matrix.drawPixel(offset_x + 0, offset_y + 3, color);
-      matrix.drawLine(offset_x + 0, offset_y + 4, offset_x + 2, offset_y + 4, color);
-    }
+void LXLedPanelNumbers_6 ( byte offset_x = 0, byte offset_y = 0, uint16_t color = YELLOW ) {
+  matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 2, offset_y + 0, color);
+  matrix.drawLine(offset_x + 0, offset_y + 1, offset_x + 0, offset_y + 4, color);
+  matrix.drawLine(offset_x + 1, offset_y + 4, offset_x + 2, offset_y + 4, color);
+  matrix.drawLine(offset_x + 2, offset_y + 2, offset_x + 2, offset_y + 3, color);
+  matrix.drawPixel(offset_x + 1, offset_y + 2, color);
+}
 
-    static void draw_3 ( int offset_x = 0, int offset_y = 0, uint16_t color = YELLOW ) {
-      clear_number(offset_x, offset_y);
-    
-      matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 2, offset_y + 0, color);
-      matrix.drawPixel(offset_x + 2, offset_y + 1, color);
-      matrix.drawLine(offset_x + 0, offset_y + 2, offset_x + 2, offset_y + 2, color);
-      matrix.drawPixel(offset_x + 2, offset_y + 3, color);
-      matrix.drawLine(offset_x + 0, offset_y + 4, offset_x + 2, offset_y + 4, color);
-    }
+void LXLedPanelNumbers_7 ( byte offset_x = 0, byte offset_y = 0, uint16_t color = YELLOW ) {
+  matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 2, offset_y + 0, color);
+  matrix.drawLine(offset_x + 2, offset_y + 1, offset_x + 2, offset_y + 4, color);
+}
 
-    static void draw_4 ( int offset_x = 0, int offset_y = 0, uint16_t color = YELLOW ) {
-      clear_number(offset_x, offset_y);
-    
-      matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 0, offset_y + 2, color);
-      matrix.drawPixel(offset_x + 1, offset_y + 2, color);
-      matrix.drawLine(offset_x + 2, offset_y + 0, offset_x + 2, offset_y + 4, color);
-    }
+void LXLedPanelNumbers_8 ( byte offset_x = 0, byte offset_y = 0, uint16_t color = YELLOW ) {
+  matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 0, offset_y + 4, color);
+  matrix.drawPixel(offset_x + 1, offset_y + 0, color);
+  matrix.drawLine(offset_x + 2, offset_y + 0, offset_x + 2, offset_y + 4, color);
+  matrix.drawPixel(offset_x + 1, offset_y + 2, color);
+  matrix.drawPixel(offset_x + 1, offset_y + 4, color);
+}
 
-    static void draw_5 ( int offset_x = 0, int offset_y = 0, uint16_t color = YELLOW ) {
-      clear_number(offset_x, offset_y);
-    
-      matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 2, offset_y + 0, color);
-      matrix.drawPixel(offset_x + 0, offset_y + 1, color);
-      matrix.drawLine(offset_x + 0, offset_y + 2, offset_x + 2, offset_y + 2, color);
-      matrix.drawPixel(offset_x + 2, offset_y + 3, color);
-      matrix.drawLine(offset_x + 0, offset_y + 4, offset_x + 2, offset_y + 4, color);
-    }
+void LXLedPanelNumbers_9 ( byte offset_x = 0, byte offset_y = 0, uint16_t color = YELLOW ) {
+  matrix.drawLine(offset_x + 0, offset_y + 4, offset_x + 2, offset_y + 4, color);
+  matrix.drawLine(offset_x + 2, offset_y + 3, offset_x + 2, offset_y + 0, color);
+  matrix.drawLine(offset_x + 1, offset_y + 0, offset_x + 0, offset_y + 0, color);
+  matrix.drawLine(offset_x + 0, offset_y + 1, offset_x + 0, offset_y + 2, color);
+  matrix.drawPixel(offset_x + 1, offset_y + 2, color);
+}
 
-    static void draw_6 ( int offset_x = 0, int offset_y = 0, uint16_t color = YELLOW ) {
-      clear_number(offset_x, offset_y);
-    
-      matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 2, offset_y + 0, color);
-      matrix.drawLine(offset_x + 0, offset_y + 1, offset_x + 0, offset_y + 4, color);
-      matrix.drawLine(offset_x + 1, offset_y + 4, offset_x + 2, offset_y + 4, color);
-      matrix.drawLine(offset_x + 2, offset_y + 2, offset_x + 2, offset_y + 3, color);
-      matrix.drawPixel(offset_x + 1, offset_y + 2, color);
-    }
+void LXLedPanelNumbers_number ( byte number = 0, byte offset_x = 0, byte offset_y = 0, uint16_t color = YELLOW ) {
+  LXLedPanelNumbers_clear(offset_x, offset_y);
 
-    static void draw_7 ( int offset_x = 0, int offset_y = 0, uint16_t color = YELLOW ) {
-      clear_number(offset_x, offset_y);
-    
-      matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 2, offset_y + 0, color);
-      matrix.drawLine(offset_x + 2, offset_y + 1, offset_x + 2, offset_y + 4, color);
-    }
+  switch ( number ) {
+    case 0: LXLedPanelNumbers_0(offset_x, offset_y, color); break;
+    case 1: LXLedPanelNumbers_1(offset_x, offset_y, color); break;
+    case 2: LXLedPanelNumbers_2(offset_x, offset_y, color); break;
+    case 3: LXLedPanelNumbers_3(offset_x, offset_y, color); break;
+    case 4: LXLedPanelNumbers_4(offset_x, offset_y, color); break;
+    case 5: LXLedPanelNumbers_5(offset_x, offset_y, color); break;
+    case 6: LXLedPanelNumbers_6(offset_x, offset_y, color); break;
+    case 7: LXLedPanelNumbers_7(offset_x, offset_y, color); break;
+    case 8: LXLedPanelNumbers_8(offset_x, offset_y, color); break;
+    case 9: LXLedPanelNumbers_9(offset_x, offset_y, color); break;
+  }
+}
 
-    static void draw_8 ( int offset_x = 0, int offset_y = 0, uint16_t color = YELLOW ) {
-      clear_number(offset_x, offset_y);
-    
-      matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 0, offset_y + 4, color);
-      matrix.drawPixel(offset_x + 1, offset_y + 0, color);
-      matrix.drawLine(offset_x + 2, offset_y + 0, offset_x + 2, offset_y + 4, color);
-      matrix.drawPixel(offset_x + 1, offset_y + 2, color);
-      matrix.drawPixel(offset_x + 1, offset_y + 4, color);
-    }
+LXLedPanelNumbers_write ( unsigned long number = 0, byte where = SCORE_POINTS, uint16_t color = YELLOW ) {
+  byte digit_1 = number % 10;
+  byte digit_2 = (int) floor(number / 10) % 10;
+  byte digit_3 = (int) floor(number / 100) % 10;
+  byte digit_4 = (int) floor(number / 1000) % 10;
+  byte digit_5 = (int) floor(number / 10000) % 10;
+  byte digit_6 = (int) floor(number / 100000) % 10;
 
-    static void draw_9 ( int offset_x = 0, int offset_y = 0, uint16_t color = YELLOW ) {
-      clear_number(offset_x, offset_y);
-    
-      matrix.drawLine(offset_x + 0, offset_y + 4, offset_x + 2, offset_y + 4, color);
-      matrix.drawLine(offset_x + 2, offset_y + 3, offset_x + 2, offset_y + 0, color);
-      matrix.drawLine(offset_x + 1, offset_y + 0, offset_x + 0, offset_y + 0, color);
-      matrix.drawLine(offset_x + 0, offset_y + 1, offset_x + 0, offset_y + 2, color);
-      matrix.drawPixel(offset_x + 1, offset_y + 2, color);
-    }
-};
+  switch (where) {
+    case SCORE_LEVELS:
+      LXLedPanelNumbers_number(digit_3, 20, 11, color);
+      LXLedPanelNumbers_number(digit_2, 24, 11, color);
+      LXLedPanelNumbers_number(digit_1, 28, 11, color);
+      break;
+
+    case SCORE_LINES:
+      LXLedPanelNumbers_number(digit_3, 20, 18, color);
+      LXLedPanelNumbers_number(digit_2, 24, 18, color);
+      LXLedPanelNumbers_number(digit_1, 28, 18, color);
+      break;
+
+    case SCORE_POINTS:
+      LXLedPanelNumbers_number(digit_6,  8, 25, color);
+      LXLedPanelNumbers_number(digit_5, 12, 25, color);
+      LXLedPanelNumbers_number(digit_4, 16, 25, color);
+      LXLedPanelNumbers_number(digit_3, 20, 25, color);
+      LXLedPanelNumbers_number(digit_2, 24, 25, color);
+      LXLedPanelNumbers_number(digit_1, 28, 25, color);
+      break;
+  }
+}
