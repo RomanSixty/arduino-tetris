@@ -16,67 +16,30 @@
 RGBmatrixPanel matrix(A, B, C, D, CLK, LAT, OE, false);
 
 // colors
-const uint16_t BLACK  = matrix.Color333(0, 0, 0);
-const uint16_t GRAY   = matrix.Color333(1, 1, 1);
-const uint16_t YELLOW = matrix.Color333(3, 2, 0);
-const uint16_t BLUE   = matrix.Color333(0, 0, 1); // I
-const uint16_t GREEN  = matrix.Color333(0, 1, 0); // T
-const uint16_t ORANGE = matrix.Color333(3, 1, 0); // L
-const uint16_t RED    = matrix.Color333(1, 0, 0); // Z + S
-const uint16_t PURPLE = matrix.Color333(1, 0, 1); // O
+#define BLACK  matrix.Color333(0, 0, 0)
+#define GRAY   matrix.Color333(1, 1, 1)
+#define YELLOW matrix.Color333(3, 2, 0)
+#define BLUE   matrix.Color333(0, 0, 1) // I
+#define GREEN  matrix.Color333(0, 1, 0) // T
+#define ORANGE matrix.Color333(3, 1, 0) // L
+#define RED    matrix.Color333(1, 0, 0) // Z + S
+#define PURPLE matrix.Color333(1, 0, 1) // O
 
-const int SCORE_POINTS = 1;
-const int SCORE_LINES  = 2;
-const int SCORE_LEVELS = 3;
+// same colors as integers to save space in the bucket
+#define COL_BLACK   0
+#define COL_GRAY    1
+#define COL_YELLOW  2
+#define COL_BLUE    3
+#define COL_GREEN   4
+#define COL_ORANGE  5
+#define COL_RED     6
+#define COL_PURPLE  7
+
+#define SCORE_POINTS 1
+#define SCORE_LINES  2
+#define SCORE_LEVELS 3
 
 // variables
-unsigned int  levels = 0;
-unsigned int  lines  = 0;
+byte levels = 0;
+byte lines  = 0;
 unsigned long points = 0;
-
-
-void setup() {
-  matrix.begin();
-
-  // draw the basic game setup
-
-  matrix.fillScreen(BLACK);
-
-  // bucket
-  matrix.drawLine(1, 5, 1, 22, GRAY);
-  matrix.drawLine(12, 5, 12, 22, GRAY);
-  matrix.drawLine(2, 22, 11, 22, GRAY);
-
-  // box for next item
-  matrix.drawLine(20, 3, 25, 3, GRAY);
-  matrix.drawLine(20, 8, 25, 8, GRAY);
-  matrix.drawLine(20, 4, 20, 7, GRAY);
-  matrix.drawLine(25, 4, 25, 7, GRAY);
-
-  // lv (= level)
-  matrix.drawLine(14, 10, 14, 15, GRAY);
-  matrix.drawLine(16, 12, 16, 15, GRAY);
-  matrix.drawLine(18, 12, 18, 13, GRAY);
-  matrix.drawPixel(17, 14, GRAY);
-
-  // ln (= lines)
-  matrix.drawLine(14, 17, 14, 22, GRAY);
-  matrix.drawLine(16, 19, 16, 22, GRAY);
-  matrix.drawLine(18, 20, 18, 22, GRAY);
-  matrix.drawPixel(17, 19, GRAY);
-
-  // pt (= points)
-  matrix.drawLine(1, 25, 1, 29, GRAY);
-  matrix.drawPixel(2, 25, GRAY);
-  matrix.drawLine(2, 27, 3, 26, GRAY);
-  matrix.drawLine(5, 25, 5, 28, GRAY);
-  matrix.drawPixel(6, 26, GRAY);
-  matrix.drawPixel(6, 29, GRAY);
-
-  // initialize scores etc.
-  start();
-}
-
-void loop() {
-
-}
