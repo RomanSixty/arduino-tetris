@@ -1,4 +1,10 @@
 void setup() {
+  pinMode(SWITCH, INPUT);
+  Serial.begin(9600);
+  
+  Serial.print(F("Setup: "));
+  Serial.println(freeRam());
+  
   matrix.begin();
 
   // draw the basic game setup
