@@ -35,7 +35,7 @@ byte levels = 0;
 byte lines  = 0;
 unsigned long points = 0;
 
-uint16_t *tetr_type;
+uint16_t tetr_type;
 byte tetr_rotation = 0;
 uint16_t tetr_color;
 byte tetr_offsX = 5;

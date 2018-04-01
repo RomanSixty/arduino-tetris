@@ -54,8 +54,6 @@ void get_tetromino() {
   Serial.print(F("get_tetromino: "));
   Serial.println(freeRam());
 
-  free(tetr_type);
-
   tetr_rotation = 0;
 
   randomSeed(analogRead(A4));
@@ -65,7 +63,7 @@ void get_tetromino() {
 
     case 0:
       Serial.println(F("I"));
-      tetr_type = pgm_read_word(TETROMINOES[0]);
+      tetr_type = pgm_read_word(TETROMINOES);
       tetr_color = BLUE;
       break;
 
@@ -73,7 +71,7 @@ void get_tetromino() {
     case 2:
     case 3:
       Serial.println(F("O"));
-      tetr_type = pgm_read_word(TETROMINOES[1]);
+      tetr_type = pgm_read_word(TETROMINOES + 1);
       tetr_color = PURPLE;
       break;
 
@@ -81,7 +79,7 @@ void get_tetromino() {
     case 5:
     case 6:
       Serial.println(F("Z"));
-      tetr_type = pgm_read_word(TETROMINOES[2]);
+      tetr_type = pgm_read_word(TETROMINOES + 2);
       tetr_color = RED;
       break;
 
@@ -89,7 +87,7 @@ void get_tetromino() {
     case 8:
     case 9:
       Serial.println(F("S"));
-      tetr_type = pgm_read_word(TETROMINOES[3]);
+      tetr_type = pgm_read_word(TETROMINOES + 3);
       tetr_color = RED;
       break;
 
@@ -97,7 +95,7 @@ void get_tetromino() {
     case 11:
     case 12:
       Serial.println(F("L"));
-      tetr_type = pgm_read_word(TETROMINOES[4]);
+      tetr_type = pgm_read_word(TETROMINOES + 4);
       tetr_color = ORANGE;
       break;
 
@@ -105,26 +103,30 @@ void get_tetromino() {
     case 14:
     case 15:
       Serial.println(F("L2"));
-      tetr_type = pgm_read_word(TETROMINOES[5]);
+      tetr_type = pgm_read_word(TETROMINOES + 5);
       tetr_color = ORANGE;
       break;
 
     default:
       Serial.println(F("T"));
-      tetr_type = pgm_read_word(TETROMINOES[6]);
+      tetr_type = pgm_read_word(TETROMINOES + 6);
       tetr_color = GREEN;
       break;
   }
 }
 
 void drop_tetromino() {
-  for ( byte i = 0; i < 16; i++ ) {
-    if ( bitRead(tetr_type [ tetr_rotation ], i) ) {
-      byte row = floor(i / 4);
-      byte col = i % 4;
+  byte tetr_offsX = 5;
+  byte tetr_offsY = 5;
 
+  for ( byte i = 0; i < 16; i++ ) {
+    byte row = floor(i / 4);
+    byte col = i % 4;
+
+    if ( bitRead(tetr_type + tetr_rotation, i) )
       matrix.drawPixel(col + tetr_offsX, row + tetr_offsY, tetr_color);
-    }
+    else
+      matrix.drawPixel(col + tetr_offsX, row + tetr_offsY, BLACK); // only for debug...
   }
 }
 

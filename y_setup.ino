@@ -44,4 +44,7 @@ void setup() {
 
   // initialize scores etc.
   reset();
+
+  get_tetromino();
+  drop_tetromino();
 }

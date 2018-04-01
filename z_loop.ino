@@ -3,8 +3,7 @@ void loop() {
   Serial.println(freeRam());
   
   if ( keys() ) {
-    get_tetromino();
-    drop_tetromino();
+
   }
 
   delay(1000);
