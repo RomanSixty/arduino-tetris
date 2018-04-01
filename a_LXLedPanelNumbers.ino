@@ -1,100 +1,44 @@
 /**
  * functions to draw numbers for scores etc.
+ * numbers are stored as 2 byte bitstreams
+ * set bits are set pixels in a raster like
+ * 
+ * 15 14 13
+ * 12 11 10
+ * 09 08 07
+ * 06 05 04
+ * 03 02 01
+ * 
+ * bit 16 is not needed
  */
-void LXLedPanelNumbers_clear ( const byte offset_x = 0, const byte offset_y = 0 ) {
-  matrix.fillRect(offset_x + 0, offset_y + 0, 3, 5, BLACK);
-}
-
-void LXLedPanelNumbers_0 ( const byte offset_x = 0, const byte offset_y = 0, const uint16_t color = YELLOW ) {
-  matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 0, offset_y + 4, color);
-  matrix.drawPixel(offset_x + 1, offset_y + 0, color);
-  matrix.drawLine(offset_x + 2, offset_y + 0, offset_x + 2, offset_y + 4, color);
-  matrix.drawPixel(offset_x + 1, offset_y + 4, color);
-}
-
-void LXLedPanelNumbers_1 ( const byte offset_x = 0, const byte offset_y = 0, const uint16_t color = YELLOW ) {
-  matrix.drawPixel(offset_x + 0, offset_y + 0, color);
-  matrix.drawLine(offset_x + 1, offset_y + 0, offset_x + 1, offset_y + 3, color);
-  matrix.drawLine(offset_x + 0, offset_y + 4, offset_x + 2, offset_y + 4, color);
-}
-
-void LXLedPanelNumbers_2 ( const byte offset_x = 0, const byte offset_y = 0, const uint16_t color = YELLOW ) {
-  matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 2, offset_y + 0, color);
-  matrix.drawPixel(offset_x + 2, offset_y + 1, color);
-  matrix.drawLine(offset_x + 0, offset_y + 2, offset_x + 2, offset_y + 2, color);
-  matrix.drawPixel(offset_x + 0, offset_y + 3, color);
-  matrix.drawLine(offset_x + 0, offset_y + 4, offset_x + 2, offset_y + 4, color);
-}
-
-void LXLedPanelNumbers_3 ( const byte offset_x = 0, const byte offset_y = 0, const uint16_t color = YELLOW ) {
-  matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 2, offset_y + 0, color);
-  matrix.drawPixel(offset_x + 2, offset_y + 1, color);
-  matrix.drawLine(offset_x + 0, offset_y + 2, offset_x + 2, offset_y + 2, color);
-  matrix.drawPixel(offset_x + 2, offset_y + 3, color);
-  matrix.drawLine(offset_x + 0, offset_y + 4, offset_x + 2, offset_y + 4, color);
-}
-
-void LXLedPanelNumbers_4 ( const byte offset_x = 0, const byte offset_y = 0, const uint16_t color = YELLOW ) {
-  matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 0, offset_y + 2, color);
-  matrix.drawPixel(offset_x + 1, offset_y + 2, color);
-  matrix.drawLine(offset_x + 2, offset_y + 0, offset_x + 2, offset_y + 4, color);
-}
-
-void LXLedPanelNumbers_5 ( const byte offset_x = 0, const byte offset_y = 0, const uint16_t color = YELLOW ) {
-  matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 2, offset_y + 0, color);
-  matrix.drawPixel(offset_x + 0, offset_y + 1, color);
-  matrix.drawLine(offset_x + 0, offset_y + 2, offset_x + 2, offset_y + 2, color);
-  matrix.drawPixel(offset_x + 2, offset_y + 3, color);
-  matrix.drawLine(offset_x + 0, offset_y + 4, offset_x + 2, offset_y + 4, color);
-}
-
-void LXLedPanelNumbers_6 ( const byte offset_x = 0, const byte offset_y = 0, const uint16_t color = YELLOW ) {
-  matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 2, offset_y + 0, color);
-  matrix.drawLine(offset_x + 0, offset_y + 1, offset_x + 0, offset_y + 4, color);
-  matrix.drawLine(offset_x + 1, offset_y + 4, offset_x + 2, offset_y + 4, color);
-  matrix.drawLine(offset_x + 2, offset_y + 2, offset_x + 2, offset_y + 3, color);
-  matrix.drawPixel(offset_x + 1, offset_y + 2, color);
-}
-
-void LXLedPanelNumbers_7 ( const byte offset_x = 0, const byte offset_y = 0, const uint16_t color = YELLOW ) {
-  matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 2, offset_y + 0, color);
-  matrix.drawLine(offset_x + 2, offset_y + 1, offset_x + 2, offset_y + 4, color);
-}
-
-void LXLedPanelNumbers_8 ( const byte offset_x = 0, const byte offset_y = 0, const uint16_t color = YELLOW ) {
-  matrix.drawLine(offset_x + 0, offset_y + 0, offset_x + 0, offset_y + 4, color);
-  matrix.drawPixel(offset_x + 1, offset_y + 0, color);
-  matrix.drawLine(offset_x + 2, offset_y + 0, offset_x + 2, offset_y + 4, color);
-  matrix.drawPixel(offset_x + 1, offset_y + 2, color);
-  matrix.drawPixel(offset_x + 1, offset_y + 4, color);
-}
-
-void LXLedPanelNumbers_9 ( const byte offset_x = 0, const byte offset_y = 0, const uint16_t color = YELLOW ) {
-  matrix.drawLine(offset_x + 0, offset_y + 4, offset_x + 2, offset_y + 4, color);
-  matrix.drawLine(offset_x + 2, offset_y + 3, offset_x + 2, offset_y + 0, color);
-  matrix.drawLine(offset_x + 1, offset_y + 0, offset_x + 0, offset_y + 0, color);
-  matrix.drawLine(offset_x + 0, offset_y + 1, offset_x + 0, offset_y + 2, color);
-  matrix.drawPixel(offset_x + 1, offset_y + 2, color);
-}
+const PROGMEM uint16_t Numbers[10] = {
+  0b0111101101101111, // 0
+  0b0111010010010011, // 1
+  0b0111001111100111, // 2
+  0b0111100111100111, // 3
+  0b0100100111101101, // 4
+  0b0111100111001111, // 5
+  0b0111101111001111, // 6
+  0b0100100100101111, // 7
+  0b0111101111101111, // 8
+  0b0111100111101111  // 9
+};
 
 void LXLedPanelNumbers_number ( const byte number = 0, const byte offset_x = 0, const byte offset_y = 0, const uint16_t color = YELLOW ) {
-  LXLedPanelNumbers_clear(offset_x, offset_y);
+  uint16_t bits_number = pgm_read_word_near(Numbers + number);
 
-  switch ( number ) {
-    case 0: LXLedPanelNumbers_0(offset_x, offset_y, color); break;
-    case 1: LXLedPanelNumbers_1(offset_x, offset_y, color); break;
-    case 2: LXLedPanelNumbers_2(offset_x, offset_y, color); break;
-    case 3: LXLedPanelNumbers_3(offset_x, offset_y, color); break;
-    case 4: LXLedPanelNumbers_4(offset_x, offset_y, color); break;
-    case 5: LXLedPanelNumbers_5(offset_x, offset_y, color); break;
-    case 6: LXLedPanelNumbers_6(offset_x, offset_y, color); break;
-    case 7: LXLedPanelNumbers_7(offset_x, offset_y, color); break;
-    case 8: LXLedPanelNumbers_8(offset_x, offset_y, color); break;
-    case 9: LXLedPanelNumbers_9(offset_x, offset_y, color); break;
+  for ( byte i = 0; i < 15; i++ ) {
+    byte row = floor(i / 3);
+    byte col = i % 3;
+
+    if ( bitRead(bits_number, i) )
+      matrix.drawPixel(col + offset_x, row + offset_y, color);
+    else
+      matrix.drawPixel(col + offset_x, row + offset_y, BLACK);
   }
 }
 
-LXLedPanelNumbers_write ( const unsigned long number = 0, const byte where = SCORE_POINTS, const uint16_t color = YELLOW ) {
+void LXLedPanelNumbers_write ( const unsigned long number = 0, const byte where = SCORE_POINTS, const uint16_t color = YELLOW ) {
   digit_1 = number % 10;
   digit_2 = (int) floor(number / 10) % 10;
   digit_3 = (int) floor(number / 100) % 10;
