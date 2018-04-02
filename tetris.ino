@@ -60,7 +60,8 @@ byte     tetr_rotation;
 int      tetr_offsX;
 int      tetr_offsY;
 
-bool game_over = false;
+bool game_over   = false;
+bool key_pressed = false;
 
 /**
  * those are the 7 different tetris bricks, each placed
