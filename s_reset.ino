@@ -1,15 +1,19 @@
 void reset() {
   Serial.print(F("Reset: "));
   Serial.println(freeRam());
+
+  tick_length = 1000;
   
   // empty bucket
   matrix.fillRect(2, 5, 10, 17, BLACK);
 
-  // empty preview box
-  matrix.fillRect(21, 4, 4, 4, BLACK);
+  // note: the top of the bucket corresponds to the floor on the panel
+  // so it's upside down
+  for ( byte i = 0; i < 17; i++ )
+    bucket[i] = 0b100000000001;
 
   // reset scores
-  levels = 0;
+  levels = 1;
   lines  = 0;
   points = 0;
 

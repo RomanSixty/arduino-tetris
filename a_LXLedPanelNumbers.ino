@@ -39,12 +39,12 @@ void LXLedPanelNumbers_number ( const byte number = 0, const byte offset_x = 0, 
 }
 
 void LXLedPanelNumbers_write ( const unsigned long number = 0, const byte where = SCORE_POINTS, const uint16_t color = YELLOW ) {
-  digit_1 = number % 10;
-  digit_2 = (int) floor(number / 10) % 10;
-  digit_3 = (int) floor(number / 100) % 10;
-  digit_4 = (int) floor(number / 1000) % 10;
-  digit_5 = (int) floor(number / 10000) % 10;
-  digit_6 = (int) floor(number / 100000) % 10;
+  byte digit_1 = number % 10;
+  byte digit_2 = (int) floor(number / 10) % 10;
+  byte digit_3 = (int) floor(number / 100) % 10;
+  byte digit_4 = (int) floor(number / 1000) % 10;
+  byte digit_5 = (int) floor(number / 10000) % 10;
+  byte digit_6 = (int) floor(number / 100000) % 10;
 
   switch (where) {
     case SCORE_LEVELS:
