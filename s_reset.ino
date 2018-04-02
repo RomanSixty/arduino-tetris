@@ -20,4 +20,6 @@ void reset() {
   LXLedPanelNumbers_write(levels, SCORE_LEVELS);
   LXLedPanelNumbers_write(lines,  SCORE_LINES);
   LXLedPanelNumbers_write(points, SCORE_POINTS);
+
+  next_tick = millis() + tick_length;
 }

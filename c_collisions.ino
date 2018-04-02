@@ -1,4 +1,4 @@
-bool check_collision ( const byte dir ) {
+bool check_collision ( const byte dir = 0 ) {
   uint16_t temp_tet        = pgm_read_word(TETROMINOES + 4*tetr_type + tetr_rotation);
   int      temp_tetr_offsX = tetr_offsX;
   int      temp_tetr_offsY = tetr_offsY;
@@ -18,24 +18,19 @@ bool check_collision ( const byte dir ) {
 
     case FALL:
       temp_tetr_offsY++;
+      break;
+
+    default: // just dropped tetromino
+      break;
   }
 
   // now check every set bit in the tetromino container
   // if it collides with a set bit in the bucket
 
-Serial.print(temp_tetr_offsY);
-Serial.print(F(" "));
-Serial.println(temp_tetr_offsX);
-Serial.println();
-
   for ( byte i = 0; i < 16; i++ ) {
     if ( bitRead(temp_tet, i) ) {
       byte row = floor(i / 4);
       byte col = i % 4;
-
-Serial.print(row+temp_tetr_offsY);
-Serial.print(F(" "));
-Serial.println(col+temp_tetr_offsX);
 
       // the floor is not included in the bucket, so check it here
       if ( row+temp_tetr_offsY > 16 )

@@ -149,34 +149,7 @@ bool move_tetromino_down() {
   Serial.println(freeRam());
   
   if ( check_collision(FALL) ) {
-    // increase score
-
-    points += 4;
-    
-    LXLedPanelNumbers_write(points, SCORE_POINTS);
-  
-    // add the current tetromino to the bucket
-    
-    uint16_t tet = pgm_read_word(TETROMINOES + 4*tetr_type + tetr_rotation);
-
-    for ( byte i = 0; i < 16; i++ ) {
-      if ( bitRead(tet, i) ) {
-        byte row = floor(i / 4);
-        byte col = i % 4;
-  
-        bitSet(bucket[row+tetr_offsY], col+tetr_offsX+1);
-      }
-    }
-    
-    // and get the next one
-
-    tetr_type  = next_tetr_type;
-    tetr_color = next_tetr_color;
-    
-    get_next_tetromino();
-    preview_tetromino();
-    
-    drop_tetromino();
+    handle_next();
   
     return false;
   }

@@ -25,6 +25,7 @@ RGBmatrixPanel matrix(A, B, C, D, CLK, LAT, OE, false);
 #define ORANGE matrix.Color333(3, 1, 0)
 #define RED    matrix.Color333(1, 0, 0)
 #define PURPLE matrix.Color333(1, 0, 1)
+#define GRASS  matrix.Color333(1, 3, 0)
 
 // for positions on the panel
 #define SCORE_POINTS 1
@@ -37,10 +38,14 @@ RGBmatrixPanel matrix(A, B, C, D, CLK, LAT, OE, false);
 #define RIGHT  3
 #define FALL   4
 
+// bucket offset on the panel
+#define BUCKET_OFFS_X 1
+#define BUCKET_OFFS_Y 5
+
 int bucket[17];
 
 unsigned long last_interaction = 0;
-unsigned long last_tick        = 0;
+unsigned long next_tick        = 0;
 int           tick_length      = 1000;
 
 // scores
@@ -54,6 +59,8 @@ uint16_t tetr_color, next_tetr_color;
 byte     tetr_rotation;
 int      tetr_offsX;
 int      tetr_offsY;
+
+bool game_over = false;
 
 /**
  * those are the 7 different tetris bricks, each placed
@@ -101,7 +108,7 @@ const PROGMEM uint16_t TETROMINOES[28] = {
   
   //  X
   // XXX
-  0b0000000011100100, 0b0000010011000100, 0b0000010011100000, 0b0000010001100100
+  0b0000000011100100, 0b0000010001100100, 0b0000010011100000, 0b0000010011000100
 };
 
 int freeRam () {
