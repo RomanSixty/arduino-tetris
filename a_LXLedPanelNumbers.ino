@@ -1,14 +1,7 @@
 /**
  * functions to draw numbers for scores etc.
  * numbers are stored as 2 byte bitstreams
- * set bits are set pixels in a raster like
- * 
- * 15 14 13
- * 12 11 10
- * 09 08 07
- * 06 05 04
- * 03 02 01
- * 
+ * set bits are set pixels in 3x5 raster
  * bit 16 is not needed
  */
 const PROGMEM uint16_t Numbers[10] = {
@@ -47,7 +40,7 @@ void LXLedPanelNumbers_write ( const unsigned long number = 0, const byte where 
   byte digit_6 = (int) floor(number / 100000) % 10;
 
   switch (where) {
-    case SCORE_LEVELS:
+    case SCORE_LEVEL:
       LXLedPanelNumbers_number(digit_3, 20, 11, color);
       LXLedPanelNumbers_number(digit_2, 24, 11, color);
       LXLedPanelNumbers_number(digit_1, 28, 11, color);

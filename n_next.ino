@@ -11,7 +11,9 @@ void handle_next() {
   throw_next();
 }
 
-// add the current tetromino to the bucket
+/** 
+ * add the current tetromino to the bucket 
+ */
 void add_to_bucket() {
   uint16_t tet = pgm_read_word(TETROMINOES + 4*tetr_type + tetr_rotation);
 
@@ -24,14 +26,14 @@ void add_to_bucket() {
     }
   }
 
-  // increase score
-
   points += 4;
 
   LXLedPanelNumbers_write(points, SCORE_POINTS);
 }
 
-// and throw in the next tetromino
+/**
+ * and throw in the next tetromino
+ */
 void throw_next() {
   tetr_type  = next_tetr_type;
   tetr_color = next_tetr_color;
@@ -41,10 +43,16 @@ void throw_next() {
 
   drop_tetromino();
 
-  if ( check_collision() )
+  if ( check_collision() ) {
     game_over = true;
+
+    delay(3000);
+  }
 }
 
+/**
+ * check for completed rows to remove
+ */
 void check_rows() {
   byte completed = 0;
 
@@ -89,28 +97,28 @@ void check_rows() {
   // scores
   switch( completed ) {
     case 1:
-      points += (20 * levels);
+      points += (20 * level);
       break;
 
     case 2:
-      points += (50 * levels);
+      points += (50 * level);
       break;
 
     case 3:
-      points += (200 * levels);
+      points += (200 * level);
       break;
 
     case 4:
-      points += (500 * levels);
+      points += (500 * level);
       break;
   }
 
   LXLedPanelNumbers_write(points, SCORE_POINTS);
 
   if ( floor ( lines / 10 ) < floor ( ( lines + completed ) / 10 ) ) {
-    levels++;
+    level++;
 
-    LXLedPanelNumbers_write(levels, SCORE_LEVELS);
+    LXLedPanelNumbers_write(level, SCORE_LEVEL);
 
     tick_length = tick_length * 8 / 10;
   }
@@ -127,9 +135,9 @@ void check_rows() {
     for ( byte col = 1; col < 11; col++ ) {
       // note: Arduino Uno's sparse memory doesn't have enough space to also remember colors
       if ( bitRead(bucket[row], col) )
-        matrix.drawPixel(col + BUCKET_OFFS_X, row + BUCKET_OFFS_Y, GRASS);
+        matrix.drawPixel(col - 1 + BUCKET_OFFS_X, row + BUCKET_OFFS_Y, CYAN);
       else
-        matrix.drawPixel(col + BUCKET_OFFS_X, row + BUCKET_OFFS_Y, BLACK);
+        matrix.drawPixel(col - 1 + BUCKET_OFFS_X, row + BUCKET_OFFS_Y, BLACK);
     }
   }
 }

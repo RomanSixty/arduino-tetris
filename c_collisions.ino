@@ -1,3 +1,8 @@
+/**
+ * collision detection
+ * checks if a tetromino can move in a certain direction or rotate
+ * returns true, if a collision is about to happen
+ */
 bool check_collision ( const byte dir = 0 ) {
   uint16_t temp_tet        = pgm_read_word(TETROMINOES + 4*tetr_type + tetr_rotation);
   int      temp_tetr_offsX = tetr_offsX;

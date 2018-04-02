@@ -1,3 +1,6 @@
+/**
+ * start a new game
+ */
 void reset() {
   // get the randomizer running
   unsigned long seed = 0;
@@ -19,11 +22,11 @@ void reset() {
     bucket[i] = 0b100000000001;
 
   // reset scores
-  levels = 1;
+  level  = 1;
   lines  = 0;
   points = 0;
 
-  LXLedPanelNumbers_write(levels, SCORE_LEVELS);
+  LXLedPanelNumbers_write(level,  SCORE_LEVEL);
   LXLedPanelNumbers_write(lines,  SCORE_LINES);
   LXLedPanelNumbers_write(points, SCORE_POINTS);
 

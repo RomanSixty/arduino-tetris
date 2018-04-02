@@ -1,3 +1,6 @@
+/**
+ * handle key presses for movement etc.
+ */
 void keys() {
   if ( millis() - last_interaction < 200 )
     return;
@@ -18,8 +21,9 @@ void keys() {
   }
 
   if ( keypress > 490 ) {
+    // allow for faster reactions when key keeps being pressed
     if ( key_pressed )
-      last_interaction = millis() - 150;
+      last_interaction = millis() - 100;
     else
       last_interaction = millis();
 

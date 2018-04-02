@@ -1,5 +1,13 @@
 /**
+ * LX' Tetris
+ * 
+ * for Arduino/Genuino Uno and a 32x32 LED matrix panel like
  * http://adafru.it/1484
+ * 
+ * four buttons are added using a resistor ladder and analog pin A5
+ * 
+ * latest version and documentation here:
+ * https://github.com/RomanSixty/arduino-tetris
  */
 
 #include <RGBmatrixPanel.h>
@@ -25,12 +33,12 @@ RGBmatrixPanel matrix(A, B, C, D, CLK, LAT, OE, false);
 #define ORANGE matrix.Color333(3, 1, 0)
 #define RED    matrix.Color333(1, 0, 0)
 #define PURPLE matrix.Color333(1, 0, 1)
-#define GRASS  matrix.Color333(1, 3, 0)
+#define CYAN   matrix.Color333(0, 1, 1)
 
 // for positions on the panel
 #define SCORE_POINTS 1
 #define SCORE_LINES  2
-#define SCORE_LEVELS 3
+#define SCORE_LEVEL  3
 
 // for collision checking
 #define ROTATE 1
@@ -39,17 +47,17 @@ RGBmatrixPanel matrix(A, B, C, D, CLK, LAT, OE, false);
 #define FALL   4
 
 // bucket offset on the panel
-#define BUCKET_OFFS_X 1
+#define BUCKET_OFFS_X 2
 #define BUCKET_OFFS_Y 5
 
 int bucket[17];
 
-unsigned long last_interaction = 0;
-unsigned long next_tick        = 0;
-int           tick_length      = 1000;
+unsigned long last_interaction = 0; // when was the last button pressed? 
+unsigned long next_tick        = 0; // when will the next automatic step happen?
+int           tick_length      = 1000; // how long does on step take? (decreases on higher levels)
 
 // scores
-byte levels;
+byte level;
 byte lines;
 unsigned long points;
 
@@ -64,20 +72,10 @@ bool game_over   = false;
 bool key_pressed = false;
 
 /**
- * those are the 7 different tetris bricks, each placed
- * in a 4x4 square like this:
- * 
- * 16 15 14 13
- * 12 11 10 09
- * 08 07 06 05
- * 04 03 02 01
- * 
+ * those are the 7 different tetris bricks, each placed in a 4x4 square
  * set bits are the parts where a brick is solid
- * 
- * the up to four quartets represent the four directions a
- * tetromino can rotate
+ * the four quartets represent the four directions a tetromino can rotate
  */
-
 const PROGMEM uint16_t TETROMINOES[28] = {
   // X
   // X
@@ -111,9 +109,3 @@ const PROGMEM uint16_t TETROMINOES[28] = {
   // XXX
   0b0000000011100100, 0b0000010001100100, 0b0000010011100000, 0b0000010011000100
 };
-
-int freeRam () {
-  extern int __heap_start, *__brkval;
-  int v;
-  return (int) &v - (__brkval == 0 ? (int) &__heap_start : (int) __brkval);
-}

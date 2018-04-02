@@ -1,5 +1,5 @@
 /**
- * get a new tetromino
+ * randomly get a new tetromino
  */
 void get_next_tetromino() {
   // of course not every tetromino has the same probability being the next one
@@ -51,6 +51,9 @@ void get_next_tetromino() {
   }
 }
 
+/**
+ * shows the next tetromino in the preview box
+ */
 void preview_tetromino() {
   matrix.fillRect(21, 4, 4, 4, BLACK);
 
@@ -66,6 +69,9 @@ void preview_tetromino() {
   }
 }
 
+/**
+ * throws a tetromino in the bucket
+ */
 void drop_tetromino() {
   // reset positions
   tetr_offsX = 3;
@@ -76,6 +82,9 @@ void drop_tetromino() {
   paint_tetromino(tetr_color);
 }
 
+/**
+ * light the corresponding LEDs for a tetromino
+ */
 void paint_tetromino ( uint16_t color ) {
   uint16_t tet = pgm_read_word(TETROMINOES + 4*tetr_type + tetr_rotation );
 
@@ -83,11 +92,14 @@ void paint_tetromino ( uint16_t color ) {
     byte row = floor(i / 4);
     byte col = i % 4;
 
-    // offsets are increased here because the bucket doesn't start at 0|0
     if ( bitRead(tet, i) )
-      matrix.drawPixel(col + tetr_offsX + 2, row + tetr_offsY + 5, color);
+      matrix.drawPixel(col + tetr_offsX + BUCKET_OFFS_X, row + tetr_offsY + BUCKET_OFFS_Y, color);
   }
 }
+
+/**
+ * tetromino movements
+ */
 
 bool rotate_tetromino() {
   if ( check_collision(ROTATE) )
