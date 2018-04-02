@@ -7,7 +7,7 @@ void handle_next() {
 
   // are there completed rows?
   check_rows();
-  
+
   throw_next();
 }
 
@@ -76,7 +76,7 @@ void check_rows() {
         else
           bucket[y] = bucket[y - completed];
       }
-      
+
       break;
     }
   }
@@ -91,39 +91,37 @@ void check_rows() {
     case 1:
       points += (20 * levels);
       break;
-     
+
     case 2:
       points += (50 * levels);
       break;
-     
+
     case 3:
       points += (200 * levels);
       break;
-     
+
     case 4:
       points += (500 * levels);
       break;
   }
 
   LXLedPanelNumbers_write(points, SCORE_POINTS);
-  
+
   // count rows
-  
+
   lines += completed;
-  
+
   LXLedPanelNumbers_write(lines,  SCORE_LINES);
 
   // paint the new bucket
-  
+
   for ( byte row = 0; row < 17; row++ ) {
     for ( byte col = 1; col < 11; col++ ) {
-      if ( bitRead(bucket[row], col) ) {
-        matrix.drawPixel(col + BUCKET_OFFS_X, row + BUCKET_OFFS_Y, GRASS); // Arduino Uno's memory doesn't have enough space to also remember colors
-      }
-      else {
+      // note: Arduino Uno's sparse memory doesn't have enough space to also remember colors
+      if ( bitRead(bucket[row], col) )
+        matrix.drawPixel(col + BUCKET_OFFS_X, row + BUCKET_OFFS_Y, GRASS);
+      else
         matrix.drawPixel(col + BUCKET_OFFS_X, row + BUCKET_OFFS_Y, BLACK);
-      }
     }
   }
 }
-

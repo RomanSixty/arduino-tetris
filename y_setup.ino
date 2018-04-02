@@ -1,10 +1,7 @@
 void setup() {
   pinMode(SWITCH, INPUT);
   Serial.begin(9600);
-  
-  Serial.print(F("Setup: "));
-  Serial.println(freeRam());
-  
+
   matrix.begin();
 
   // draw the basic game setup
@@ -45,21 +42,14 @@ void setup() {
   // initialize scores etc.
   reset();
 
-  // get the randomizer running
-  unsigned long seed = 0;
-  for (int i=0; i<32; i++) {
-    seed = seed | ((analogRead(A4) & 0x01) << i);
-  }
-  randomSeed(seed);
-
   // and start dropping the first tetromino
   get_next_tetromino();
 
   tetr_type  = next_tetr_type;
   tetr_color = next_tetr_color;
-  
+
   get_next_tetromino();
   preview_tetromino();
-  
+
   drop_tetromino();
 }

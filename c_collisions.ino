@@ -2,7 +2,7 @@ bool check_collision ( const byte dir = 0 ) {
   uint16_t temp_tet        = pgm_read_word(TETROMINOES + 4*tetr_type + tetr_rotation);
   int      temp_tetr_offsX = tetr_offsX;
   int      temp_tetr_offsY = tetr_offsY;
-  
+
   switch ( dir ) {
     case ROTATE:
       temp_tet = pgm_read_word(TETROMINOES + 4*tetr_type + (tetr_rotation + 1)%4 );
@@ -41,7 +41,7 @@ bool check_collision ( const byte dir = 0 ) {
         return true;
     }
   }
-  
+
   return false;
 }
 

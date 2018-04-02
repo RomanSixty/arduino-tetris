@@ -1,9 +1,15 @@
 void reset() {
-  Serial.print(F("Reset: "));
-  Serial.println(freeRam());
+  // get the randomizer running
+  unsigned long seed = 0;
+  
+  for ( byte i = 0; i < 32; i++ ) {
+    seed = seed | ((analogRead(A4) & 0x01) << i);
+  }
+
+  randomSeed ( seed );
 
   tick_length = 1000;
-  
+
   // empty bucket
   matrix.fillRect(2, 5, 10, 17, BLACK);
 
