@@ -107,6 +107,14 @@ void check_rows() {
 
   LXLedPanelNumbers_write(points, SCORE_POINTS);
 
+  if ( floor ( lines / 10 ) < floor ( ( lines + completed ) / 10 ) ) {
+    levels++;
+
+    LXLedPanelNumbers_write(levels, SCORE_LEVELS);
+
+    tick_length = tick_length * 8 / 10;
+  }
+
   // count rows
 
   lines += completed;
