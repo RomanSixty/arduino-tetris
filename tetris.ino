@@ -52,8 +52,8 @@ RGBmatrixPanel matrix(A, B, C, D, CLK, LAT, OE, false);
 
 int bucket[17];
 
-unsigned long last_interaction = 0; // when was the last button pressed? 
-unsigned long next_tick        = 0; // when will the next automatic step happen?
+unsigned long last_interaction =    0; // when was the last button pressed? 
+unsigned long next_tick        =    0; // when will the next automatic step happen?
 int           tick_length      = 1000; // how long does on step take? (decreases on higher levels)
 
 // scores
@@ -81,7 +81,7 @@ const PROGMEM uint16_t TETROMINOES[28] = {
   // X
   // X
   // X
-  0b0100010001000100, 0b0000000011110000, 0b0100010001000100, 0b0000000011110000,
+  0b0000000011110000, 0b0100010001000100, 0b0000000011110000, 0b0100010001000100,
 
   // XX
   // XX
@@ -98,12 +98,12 @@ const PROGMEM uint16_t TETROMINOES[28] = {
   // X
   // X
   // XX
-  0b0000011101000000, 0b0100010001100000, 0b0000001011100000, 0b0000011000100010,
+  0b0000000001110100, 0b0000010001000110, 0b0000000000010111, 0b0000011000100010,
 
   //  X
   //  X
   // XX
-  0b0000111000100000, 0b0000011001000100, 0b0000010001110000, 0b0010001001100000,
+  0b0000000011100010, 0b0000011001000100, 0b0000000010001110, 0b0000001000100110,
 
   //  X
   // XXX
