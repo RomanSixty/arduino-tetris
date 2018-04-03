@@ -64,8 +64,9 @@ void preview_tetromino() {
     byte col = i % 4;
 
     // use offsets for the preview box
+    // also put every brick a row further down
     if ( bitRead(tet, i) )
-      matrix.drawPixel(col + 21, row + 4, next_tetr_color);
+      matrix.drawPixel(col + 21, row + 5, next_tetr_color);
   }
 }
 
