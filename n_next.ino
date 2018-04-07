@@ -26,7 +26,7 @@ void add_to_bucket() {
     }
   }
 
-  points += 4;
+  points += 4 * level;
 
   LXLedPanelNumbers_write(points, SCORE_POINTS);
 }
@@ -97,30 +97,30 @@ void check_rows() {
   // scores
   switch( completed ) {
     case 1:
-      points += (20 * level);
+      points += (40 * level);
       break;
 
     case 2:
-      points += (50 * level);
+      points += (100 * level);
       break;
 
     case 3:
-      points += (200 * level);
+      points += (300 * level);
       break;
 
     case 4:
-      points += (500 * level);
+      points += (800 * level);
       break;
   }
 
   LXLedPanelNumbers_write(points, SCORE_POINTS);
 
-  if ( floor ( lines / 10 ) < floor ( ( lines + completed ) / 10 ) ) {
+  if ( floor ( lines / 5 ) < floor ( ( lines + completed ) / 5 ) ) {
     level++;
 
     LXLedPanelNumbers_write(level, SCORE_LEVEL);
 
-    tick_length = tick_length * 8 / 10;
+    tick_length = tick_length * 9 / 10;
   }
 
   // count rows
