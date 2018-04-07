@@ -13,3 +13,5 @@ A demo of the game in action can be found on [YouTube](https://www.youtube.com/w
 ## Update 2018-04-07
 
 Now there's a new branch called `mega` where I adapted the game for Arduino Mega. Instead of four pushbuttons I used a [4x4 membrane switch keypad](http://www.circuitbasics.com/how-to-set-up-a-keypad-on-an-arduino/). So far the pushbuttons had a better usability for me, though.
+
+Also in the Mega version the colors of bricks in the bucket don't have to change when clearing lines. Mega's memory is sufficient to remember each pixel's color.
