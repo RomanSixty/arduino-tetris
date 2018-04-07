@@ -1,5 +1,4 @@
 void setup() {
-  pinMode(SWITCH, INPUT);
   Serial.begin(9600);
 
   matrix.begin();
