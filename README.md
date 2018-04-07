@@ -6,7 +6,10 @@ The wiring is as follows:
 
 ![Wiring](images/wiring.png)
 
-A demo of the game in action can be found here:
-https://www.youtube.com/watch?v=rai_6IEXC00
+This is basically the base wiring [Adafruit describes in their documentation](https://learn.adafruit.com/32x16-32x32-rgb-led-matrix/connecting-with-jumper-wires) with a resistor ladder for four control buttons added.
 
+A demo of the game in action can be found on [YouTube](https://www.youtube.com/watch?v=rai_6IEXC00).
 
+## Update 2018-04-07
+
+Now there's a new branch called `mega` where I adapted the game for Arduino Mega. Instead of four pushbuttons I used a [4x4 membrane switch keypad](http://www.circuitbasics.com/how-to-set-up-a-keypad-on-an-arduino/). So far the pushbuttons had a better usability for me, though.
