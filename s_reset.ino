@@ -19,7 +19,8 @@ void reset() {
   // note: the top of the bucket corresponds to the floor on the panel
   // so it's upside down
   for ( byte i = 0; i < 17; i++ )
-    bucket[i] = 0b100000000001;
+    for ( byte j = 0; j < 10; j++ )
+      bucket[i*10+j] = BLACK;
 
   // reset scores
   level  = 1;

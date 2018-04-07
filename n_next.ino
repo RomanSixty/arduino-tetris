@@ -22,7 +22,7 @@ void add_to_bucket() {
       byte row = floor(i / 4);
       byte col = i % 4;
 
-      bitSet(bucket[row+tetr_offsY], col+tetr_offsX+1);
+      bucket[(row+tetr_offsY)*10 + col+tetr_offsX] = tetr_color;
     }
   }
 
@@ -57,21 +57,21 @@ void check_rows() {
   byte completed = 0;
 
   for ( byte i = 0; i < 17; i++ ) {
-    if ( bucket[i] == 0b111111111111 ) {
+    if ( is_complete_row(i) ) {
       completed++;
 
       matrix.drawLine(2, i+5, 11, i+5, BLACK);
 
       // only the next 3 rows could also be effected
-      if ( bucket[i+1] == 0b111111111111 ) {
+      if ( is_complete_row(i+1) ) {
         completed++;
         matrix.drawLine(2, i+6, 11, i+6, BLACK);
       }
-      if ( bucket[i+2] == 0b111111111111 ) {
+      if ( is_complete_row(i+2) ) {
         completed++;
         matrix.drawLine(2, i+7, 11, i+7, BLACK);
       }
-      if ( bucket[i+3] == 0b111111111111 ) {
+      if ( is_complete_row(i+3) ) {
         completed++;
         matrix.drawLine(2, i+8, 11, i+8, BLACK);
       }
@@ -79,10 +79,14 @@ void check_rows() {
       // shift the bucket
 
       for ( int y = i + completed - 1; y >= 0; y-- ) {
-        if ( y - completed < 0 )
-          bucket[y] = 0b100000000001;
-        else
-          bucket[y] = bucket[y - completed];
+        if ( y - completed < 0 ) {
+          for ( byte j = 0; j < 10; j++ )
+            bucket[y*10+j] = BLACK;
+        }
+        else {
+          for ( byte j = 0; j < 10; j++ )
+            bucket[y*10+j] = bucket[(y - completed)*10+j];
+        }
       }
 
       break;
@@ -132,12 +136,24 @@ void check_rows() {
   // paint the new bucket
 
   for ( byte row = 0; row < 17; row++ ) {
-    for ( byte col = 1; col < 11; col++ ) {
-      // note: Arduino Uno's sparse memory doesn't have enough space to also remember colors
-      if ( bitRead(bucket[row], col) )
-        matrix.drawPixel(col - 1 + BUCKET_OFFS_X, row + BUCKET_OFFS_Y, CYAN);
-      else
-        matrix.drawPixel(col - 1 + BUCKET_OFFS_X, row + BUCKET_OFFS_Y, BLACK);
+    for ( byte col = 0; col < 10; col++ ) {
+      matrix.drawPixel(col + BUCKET_OFFS_X, row + BUCKET_OFFS_Y, bucket[row*10+col]);
     }
   }
 }
+
+bool is_complete_row ( byte row ) {
+  return ( 
+    bucket[row*10]   > 0 &&
+    bucket[row*10+1] > 0 &&
+    bucket[row*10+2] > 0 &&
+    bucket[row*10+3] > 0 &&
+    bucket[row*10+4] > 0 &&
+    bucket[row*10+5] > 0 &&
+    bucket[row*10+6] > 0 &&
+    bucket[row*10+7] > 0 &&
+    bucket[row*10+8] > 0 &&
+    bucket[row*10+9] > 0
+  );
+}
+
